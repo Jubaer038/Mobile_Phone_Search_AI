@@ -18,7 +18,7 @@ if theme == "Dark":
         unsafe_allow_html=True
     )
 
-uploaded_file = st.file_uploader("Upload PDF, TXT, or DOCX", type=["pdf","txt","docx"])
+uploaded_file = st.file_uploader("Upload PDF, TXT, or DOCX", type=["pdf", "txt", "docx"])
 user_question = st.text_input("Ask a question:")
 
 if 'vectordb' not in st.session_state:
@@ -27,6 +27,7 @@ if 'chain' not in st.session_state:
     st.session_state.chain = None
 
 def load_text(file):
+    """Load text from PDF, TXT, DOCX"""
     if file.type == "application/pdf":
         pdf = PdfReader(file)
         text = ""
@@ -44,6 +45,7 @@ def load_text(file):
     else:
         return ""
 
+# Process uploaded file
 if uploaded_file:
     raw_text = load_text(uploaded_file)
     chunks = text_to_chunks(raw_text)
@@ -51,6 +53,7 @@ if uploaded_file:
     st.session_state.chain, st.session_state.memory = create_conversational_chain(st.session_state.vectordb)
     st.success("✅ File loaded and vector DB created!")
 
+# Process user question
 if user_question and st.session_state.chain:
     with st.spinner("Generating answer..."):
         result = st.session_state.chain.run(user_question)
