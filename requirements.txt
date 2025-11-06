@@ -1,0 +1,12 @@
+streamlit
+langchain==1.0.3
+langchain-community==0.4.1
+langchain-text-splitters==1.0.0
+chromadb
+huggingface_hub
+pandas
+python-dotenv
+PyPDF2
+python-docx
+sentence-transformers
+tqdm
