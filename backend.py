@@ -10,7 +10,7 @@ from langchain.memory import ConversationBufferMemory
 load_dotenv()
 
 CHROMA_PATH = "chroma_db"
-HF_API_KEY = os.getenv("HUGGINGFACEHUB_API_TOKEN")  # .env file এ add করো
+HF_API_KEY = os.getenv("HUGGINGFACEHUB_API_TOKEN")  # Add in your .env
 
 def get_embeddings():
     return HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
