@@ -1,8 +1,6 @@
 import streamlit as st
-import pandas as pd
 from backend import text_to_chunks, create_or_load_chroma, create_llm, create_conversational_chain
 from PyPDF2 import PdfReader
-from io import StringIO
 from docx import Document
 
 st.set_page_config(page_title="Mobile Search AI", layout="wide")
@@ -33,7 +31,7 @@ def load_text(file):
         pdf = PdfReader(file)
         text = ""
         for page in pdf.pages:
-            text += page.extract_text()
+            text += page.extract_text() or ""
         return text
     elif file.type == "text/plain":
         return file.read().decode("utf-8")
